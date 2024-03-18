@@ -1,9 +1,12 @@
 import React from "react";
 import Image from "next/image";
+import Dropdown from "react-bootstrap/Dropdown";
 import PostActions from "./PostActions";
 import styled from "styled-components";
 import { FaRegUserCircle } from "react-icons/fa";
+import { BsThreeDotsVertical } from "react-icons/bs";
 import { TPost } from "@/server/types";
+import Link from "../UI/Link";
 
 type TPostComp = {
 	post: TPost;
@@ -24,16 +27,49 @@ const PostImageStyles: React.CSSProperties = {
 	maxWidth: "100%",
 };
 
+type AnchorProps = React.HTMLProps<HTMLAnchorElement>;
+
+const DropdownFc = React.forwardRef<HTMLAnchorElement, AnchorProps>(
+	({ children, onClick }, ref) => {
+		return (
+			<a
+				href="javascript:void(0);"
+				onClick={(e) => {
+					e.preventDefault();
+					onClick && onClick(e);
+				}}
+				ref={ref}
+			>
+				{children}
+			</a>
+		);
+	}
+);
+
 const Post: React.FC<TPostComp> = ({ post }) => {
 	return (
 		<div className="border rounded">
 			<div className="p-1 p-md-3 border border-0 border-bottom">
-				<div className="d-flex align-items-center mb-2">
-					<picture>
-						<FaRegUserCircle size="42px" />
-					</picture>
-					<span className="ms-2 fw-bold">{post?.User?.name}</span>
+				<div className="d-flex align-items-start">
+					<div className="d-flex align-items-center mb-2">
+						<picture>
+							<FaRegUserCircle size="42px" />
+						</picture>
+						<span className="ms-2 fw-bold">{post?.User?.name}</span>
+					</div>
+					<Dropdown className="ms-auto">
+						<Dropdown.Toggle as={DropdownFc}>
+							<BsThreeDotsVertical size="32px" />
+						</Dropdown.Toggle>
+
+						<Dropdown.Menu>
+							<Dropdown.Item as="div" eventKey="1">
+								<Link href={`/post/${post.id}`}>View Post</Link>
+							</Dropdown.Item>
+						</Dropdown.Menu>
+					</Dropdown>
 				</div>
+
 				{post.content && <p className="mb-2">{post.content}</p>}
 			</div>
 
