@@ -1,0 +1,172 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider        = "prisma-client-js"
+    previewFeatures = ["jsonProtocol"]
+}
+
+datasource db {
+    provider = "mysql"
+    // NOTE: When using mysql or sqlserver, uncomment the @db.Text annotations in model Account below
+    // Further reading:
+    // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
+    // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
+    url      = env("DATABASE_URL")
+}
+
+// Necessary for Next auth
+model Account {
+    id                Int     @id @default(autoincrement()) @db.UnsignedInt
+    userId            Int     @db.UnsignedInt
+    type              String
+    provider          String
+    providerAccountId String
+    refresh_token     String? @db.Text
+    access_token      String? @db.Text
+    expires_at        Int?
+    token_type        String?
+    scope             String?
+    id_token          String? @db.Text
+    session_state     String?
+    user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@unique([provider, providerAccountId])
+}
+
+model Session {
+    id           Int      @id @default(autoincrement()) @db.UnsignedInt
+    sessionToken String   @unique
+    userId       Int      @db.UnsignedInt
+    expires      DateTime
+    User         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+    id            Int       @id @default(autoincrement()) @db.UnsignedInt
+    name          String?
+    email         String?   @unique
+    emailVerified DateTime?
+    phone         String?   @db.VarChar(12)
+    phoneVerified DateTime?
+    otp           String?   @db.VarChar(6)
+    otpValidTill  DateTime?
+    image         String?
+    blockedTill   DateTime?
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    Accounts Account[]
+    Sessions Session[]
+
+    // one-to-many: has many posts this user created
+    Posts Post[] @relation("user_posts")
+
+    // many-to-many: has many posts this user liked
+    LikedPosts UserLikedPost[] @relation("liked_posts")
+
+    // one-to-many: has many comments this user created
+    Comments Comment[] @relation("user_comments")
+
+    // one-to-many: has many tags this user proposed and created
+    MyTags Tag[] @relation("user_tags")
+
+    // one-to-many: has many posts this user reported
+    Reports Report[] @relation("user_reports")
+}
+
+model VerificationToken {
+    identifier String
+    token      String   @unique
+    expires    DateTime
+
+    @@unique([identifier, token])
+}
+
+model Post {
+    id        Int     @id @default(autoincrement()) @db.UnsignedInt
+    file_path String? @db.Text
+    file_type String? @default("image") @db.VarChar(32)
+    content   String? @db.Text
+
+    // one-to-one: belongs to one User
+    User   User? @relation("user_posts", fields: [userId], references: [id], onDelete: SetNull)
+    userId Int?  @db.UnsignedInt
+
+    // how many times this post was liked
+    likesCount Int             @default(0) @db.UnsignedInt
+    LikedBy    UserLikedPost[] @relation("post_likes")
+
+    Comments Comment[] @relation("post_comments")
+
+    Tags PostTag[] @relation("post_tags")
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model UserLikedPost {
+    user   User @relation("liked_posts", fields: [userId], references: [id])
+    userId Int  @db.UnsignedInt
+    post   Post @relation("post_likes", fields: [postId], references: [id])
+    postId Int  @db.UnsignedInt
+
+    createdAt DateTime @default(now())
+
+    @@id([userId, postId])
+}
+
+model Comment {
+    id      Int     @id @default(autoincrement()) @db.UnsignedInt
+    content String? @db.VarChar(280)
+
+    // one-to-one: belongs to one User
+    User   User? @relation("user_comments", fields: [userId], references: [id], onDelete: SetNull)
+    userId Int?  @db.UnsignedInt
+
+    // one-to-one: belongs to one Post
+    Post   Post? @relation("post_comments", fields: [postId], references: [id], onDelete: SetNull)
+    postId Int?  @db.UnsignedInt
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model Tag {
+    id   Int    @id @default(autoincrement()) @db.UnsignedInt
+    name String @unique @db.VarChar(32)
+
+    // one-to-one: belongs to one User
+    User   User? @relation("user_tags", fields: [userId], references: [id], onDelete: SetNull)
+    userId Int?  @db.UnsignedInt
+
+    // many-to-many: has many posts with this tag
+    Posts PostTag[] @relation("tag_posts")
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model PostTag {
+    post   Post @relation("post_tags", fields: [postId], references: [id])
+    postId Int  @db.UnsignedInt
+
+    tag   Tag @relation("tag_posts", fields: [tagId], references: [id])
+    tagId Int @db.UnsignedInt
+
+    @@id([postId, tagId])
+}
+
+model Report {
+    id   Int    @id @default(autoincrement()) @db.UnsignedInt
+    type String
+
+    resolved DateTime?
+
+    User   User @relation("user_reports", fields: [userId], references: [id], onDelete: Cascade)
+    userId Int  @db.UnsignedInt
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
