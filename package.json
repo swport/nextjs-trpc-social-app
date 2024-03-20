@@ -27,6 +27,7 @@
     "next": "^13.4.2",
     "next-auth": "^4.22.1",
     "next-i18next": "^14.0.3",
+    "nextjs-progressbar": "^0.0.16",
     "nodemailer": "^6.9.4",
     "react": "18.2.0",
     "react-bootstrap": "^2.8.0",

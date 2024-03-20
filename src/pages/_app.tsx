@@ -7,6 +7,7 @@ import { appWithTranslation } from "next-i18next";
 import { AppModal, NotificationToast, OffCanvas } from "@/components";
 import PrivateRoute from "@/components/Auth/PrivateRoute";
 import type { NextComponentType } from "next";
+import NextNProgress from "nextjs-progressbar";
 
 // this doesn't look right;
 // TODO: find better solution
@@ -40,6 +41,7 @@ const MyApp: CustomAppType = ({
 
 	return (
 		<SessionProvider session={session}>
+			<NextNProgress />
 			{requires_auth ? (
 				<PrivateRoute>
 					getPageLayout(
