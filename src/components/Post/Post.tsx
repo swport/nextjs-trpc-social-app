@@ -7,9 +7,14 @@ import { FaRegUserCircle } from "react-icons/fa";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { TPost } from "@/server/types";
 import Link from "../UI/Link";
+import { trpc } from "@/utils/trpc";
+import { useSession } from "next-auth/react";
+import { useAtom } from "jotai";
+import { notifAtom } from "@/store/notification";
 
 type TPostComp = {
 	post: TPost;
+	authUserId?: number | null;
 };
 
 const PostDiv = styled.div`
@@ -46,7 +51,27 @@ const DropdownFc = React.forwardRef<HTMLAnchorElement, AnchorProps>(
 	}
 );
 
-const Post: React.FC<TPostComp> = ({ post }) => {
+const Post: React.FC<TPostComp> = ({ post, authUserId }) => {
+	const removePostMutation = trpc.post.remove.useMutation();
+	const [notifData, setNotifData] = useAtom(notifAtom);
+
+	const removePost = (postId: number) => {
+		if (confirm("Are you sure you want to remove your post?")) {
+			removePostMutation.mutate(
+				{ postId },
+				{
+					onSuccess: () => {
+						setNotifData({
+							...notifData,
+							show: true,
+							content: "Post removed",
+						});
+					},
+				}
+			);
+		}
+	};
+
 	return (
 		<div className="border rounded">
 			<div className="p-1 p-md-3 border border-0 border-bottom">
@@ -66,6 +91,15 @@ const Post: React.FC<TPostComp> = ({ post }) => {
 							<Dropdown.Item as="div" eventKey="1">
 								<Link href={`/post/${post.id}`}>View Post</Link>
 							</Dropdown.Item>
+							{authUserId && authUserId === post.User?.id ? (
+								<Dropdown.Item
+									eventKey="2"
+									className="text-danger"
+									onClick={() => removePost(post.id)}
+								>
+									Remove post
+								</Dropdown.Item>
+							) : null}
 						</Dropdown.Menu>
 					</Dropdown>
 				</div>
