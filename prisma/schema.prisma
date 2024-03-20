@@ -1,6 +1,9 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
+// collation: utf8mb4_unicode_ci
+// type: innodb
+
 generator client {
     provider        = "prisma-client-js"
     previewFeatures = ["jsonProtocol"]
@@ -96,6 +99,7 @@ model Post {
 
     // how many times this post was liked
     likesCount Int             @default(0) @db.UnsignedInt
+
     LikedBy    UserLikedPost[] @relation("post_likes")
 
     Comments Comment[] @relation("post_comments")
@@ -107,9 +111,9 @@ model Post {
 }
 
 model UserLikedPost {
-    user   User @relation("liked_posts", fields: [userId], references: [id])
+    user   User @relation("liked_posts", fields: [userId], references: [id], onDelete: Cascade)
     userId Int  @db.UnsignedInt
-    post   Post @relation("post_likes", fields: [postId], references: [id])
+    post   Post @relation("post_likes", fields: [postId], references: [id], onDelete: Cascade)
     postId Int  @db.UnsignedInt
 
     createdAt DateTime @default(now())
@@ -126,8 +130,8 @@ model Comment {
     userId Int?  @db.UnsignedInt
 
     // one-to-one: belongs to one Post
-    Post   Post? @relation("post_comments", fields: [postId], references: [id], onDelete: SetNull)
-    postId Int?  @db.UnsignedInt
+    Post   Post @relation("post_comments", fields: [postId], references: [id], onDelete: Cascade)
+    postId Int  @db.UnsignedInt
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
@@ -149,7 +153,7 @@ model Tag {
 }
 
 model PostTag {
-    post   Post @relation("post_tags", fields: [postId], references: [id])
+    post   Post @relation("post_tags", fields: [postId], references: [id], onDelete: Cascade)
     postId Int  @db.UnsignedInt
 
     tag   Tag @relation("tag_posts", fields: [tagId], references: [id])
