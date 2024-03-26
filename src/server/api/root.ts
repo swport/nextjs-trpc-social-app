@@ -2,7 +2,6 @@ import { createTRPCRouter } from "@/server/api/trpc";
 import { sendOtpProcedure } from "./public/send-otp";
 import { postRouter } from "./routes/post/post";
 import { commentRouter } from "./routes/comment/comment";
-import { fetchPostsPublicProcedure } from "./public/fetch-post";
 
 /**
  * This is the primary router for your server.
@@ -11,7 +10,6 @@ import { fetchPostsPublicProcedure } from "./public/fetch-post";
  */
 export const appRouter = createTRPCRouter({
 	send_otp: sendOtpProcedure,
-	fetch_posts: fetchPostsPublicProcedure,
 	post: postRouter,
 	comment: commentRouter,
 });

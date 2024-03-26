@@ -12,7 +12,7 @@ type ResponseType = {
 	data: TPost[];
 };
 
-export const fetchPostsPublicProcedure = publicProcedure
+export const fetchAllPostPublicProcedure = publicProcedure
 	.input(
 		z.object({
 			limit: z.number().min(1).max(100).nullish(),
