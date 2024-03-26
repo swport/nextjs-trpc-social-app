@@ -73,11 +73,11 @@ export const fetchPostsPublicProcedure = publicProcedure
 
 		if (results.length > limit) {
 			const nextItem = results.pop();
-			nextCursor = nextItem!.id;
+			nextCursor = nextItem ? nextItem.id : undefined;
 		}
 
 		const data = results.map((post) => {
-			let p = setTypesafeKeyValToObject(post, "likes", post._count.LikedBy);
+			const p = setTypesafeKeyValToObject(post, "likes", post._count.LikedBy);
 			return setTypesafeKeyValToObject(
 				p,
 				"likedBySelf",
