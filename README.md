@@ -1,5 +1,7 @@
 # Full stack Javascript social application
 
-Next.js, TRPC, Prisma
+## Stack - Next.js, TRPC, Prisma, Bootstrap 5 - UI
 
-Bootstrap 5
+## Teting, Code coverage - Testing with Jest + RTL
+
+## Internationalization - next-i18next (LtR only)
