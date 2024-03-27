@@ -1,5 +1,4 @@
 import { publicProcedure } from "@/server/api/trpc";
-import ApiResponse from "@/server/utils/api-response";
 import { PrismaClient } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 import type { TPubUser } from "@/server/types";
@@ -41,5 +40,5 @@ export const getProfileByIdPublicProcedure = publicProcedure
 			});
 		}
 
-		return ApiResponse.success<TPubUser>("data", profile);
+		return profile;
 	});

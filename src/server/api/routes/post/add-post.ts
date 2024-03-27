@@ -1,4 +1,3 @@
-import ApiResponse from "@/server/utils/api-response";
 import { protectedProcedure } from "../../trpc";
 import { PrismaClient, Post } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
@@ -81,5 +80,5 @@ export const addPostProtectedProcedure = protectedProcedure
 			});
 		}
 
-		return ApiResponse.success<TPost>("Post added", post);
+		return post;
 	});

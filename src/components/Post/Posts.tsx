@@ -56,7 +56,7 @@ const Posts: React.FC = () => {
 			<div className="mt-2 mt-md-3 vstack gap-5 position-relative">
 				{posts?.pages.map((group, i) => (
 					<React.Fragment key={i}>
-						{group?.results?.data.map((post) => (
+						{group?.data.map((post) => (
 							<Post key={post.id} post={post} authUserId={authUserId} />
 						))}
 					</React.Fragment>

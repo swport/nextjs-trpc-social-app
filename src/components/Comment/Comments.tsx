@@ -27,8 +27,8 @@ const Comments: React.FC<TProps> = ({ postId }) => {
 		},
 		{
 			getNextPageParam: (lastPage) => {
-				if (lastPage && lastPage.results?.nextCursor) {
-					return lastPage.results.nextCursor;
+				if (lastPage && lastPage?.nextCursor) {
+					return lastPage.nextCursor;
 				}
 				return null;
 			},
@@ -79,7 +79,7 @@ const Comments: React.FC<TProps> = ({ postId }) => {
 
 			{comments?.pages.map((group, idx) => (
 				<React.Fragment key={idx}>
-					{group?.results?.data.map((comment) => (
+					{group?.data.map((comment) => (
 						<Comment
 							key={comment.id}
 							comment={comment}

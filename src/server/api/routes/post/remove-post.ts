@@ -34,5 +34,5 @@ export const removePostProtectedProcedure = protectedProcedure
 			});
 		}
 
-		return ApiResponse.success("Post deleted");
+		return "Post removed";
 	});

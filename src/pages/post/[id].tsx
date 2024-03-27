@@ -1,6 +1,6 @@
 import React from "react";
 import { AppLayout, Post, Comments } from "@/components";
-import { InferGetServerSidePropsType } from "next";
+import { type InferGetServerSidePropsType } from "next";
 import { trpc } from "@/utils/trpc";
 
 import { getServerSideProps } from "@/server/ssr/post";
@@ -15,9 +15,7 @@ const PostPage = (
 		return <>Loading...</>;
 	}
 
-	const { data } = postQuery;
-
-	const post = data?.results;
+	const { data: post } = postQuery;
 
 	return (
 		<AppLayout>

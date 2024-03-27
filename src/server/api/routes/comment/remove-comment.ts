@@ -4,7 +4,6 @@ import { z } from "zod";
 import { rescue } from "@/server/utils";
 import { PrismaClient } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
-import ApiResponse from "@/server/utils/api-response";
 
 const prisma = new PrismaClient();
 
@@ -34,5 +33,5 @@ export const removeCommentProtectedProcedure = protectedProcedure
 			});
 		}
 
-		return ApiResponse.success("Comment removed");
+		return "Comment removed";
 	});

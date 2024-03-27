@@ -9,8 +9,8 @@ const useFetchPosts = () => {
 		},
 		{
 			getNextPageParam: (lastPage) => {
-				if (lastPage && lastPage.results?.nextCursor) {
-					return lastPage.results.nextCursor;
+				if (lastPage && lastPage.nextCursor) {
+					return lastPage.nextCursor;
 				}
 				return null;
 			},

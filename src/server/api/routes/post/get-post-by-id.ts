@@ -1,5 +1,4 @@
 import { publicProcedure } from "@/server/api/trpc";
-import ApiResponse from "@/server/utils/api-response";
 import { PrismaClient } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 import type { TPost } from "@/server/types";
@@ -73,5 +72,5 @@ export const getPostByIdPublicProcedure = publicProcedure
 			});
 		}
 
-		return ApiResponse.success<TPost>("data", post);
+		return post;
 	});

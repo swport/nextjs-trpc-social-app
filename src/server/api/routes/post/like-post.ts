@@ -1,4 +1,3 @@
-import ApiResponse from "@/server/utils/api-response";
 import { protectedProcedure } from "../../trpc";
 import { PrismaClient } from "@prisma/client";
 import { z } from "zod";
@@ -44,5 +43,5 @@ export const likePostProtectedProcedure = protectedProcedure
 			});
 		}
 
-		return ApiResponse.success("Updated");
+		return "Post updated";
 	});

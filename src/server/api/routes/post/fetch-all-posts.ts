@@ -1,5 +1,4 @@
 import { publicProcedure } from "@/server/api/trpc";
-import ApiResponse from "@/server/utils/api-response";
 import { PrismaClient } from "@prisma/client";
 import type { TPost } from "@/server/types";
 import { z } from "zod";
@@ -85,8 +84,8 @@ export const fetchAllPostPublicProcedure = publicProcedure
 			);
 		});
 
-		return ApiResponse.success<ResponseType>("data", {
+		return {
 			nextCursor,
 			data,
-		});
+		};
 	});

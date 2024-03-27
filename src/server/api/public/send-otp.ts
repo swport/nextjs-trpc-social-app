@@ -1,7 +1,6 @@
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
 import { publicProcedure } from "@/server/api/trpc";
-import ApiResponse from "@/server/utils/api-response";
 import { rescue } from "@/server/utils";
 import { generate_otp } from "@/utils/functions";
 import prismaAdapter from "@/server/prisma-adapter";
@@ -46,5 +45,5 @@ export const sendOtpProcedure = publicProcedure
 			});
 		}
 
-		return ApiResponse.success("OTP sent successfully");
+		return "OTP sent successfully";
 	});

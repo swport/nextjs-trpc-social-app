@@ -1,10 +1,9 @@
-import { TComment } from "@/server/types";
+import { type TComment } from "@/server/types";
 import { protectedProcedure, publicProcedure } from "../../trpc";
 import { z } from "zod";
 import { rescue } from "@/server/utils";
 import { PrismaClient } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
-import ApiResponse from "@/server/utils/api-response";
 
 const prisma = new PrismaClient();
 
@@ -58,8 +57,8 @@ export const listCommentProtectedProcedure = publicProcedure
 			nextCursor = nextItem!.id;
 		}
 
-		return ApiResponse.success<ResponseType>("data", {
+		return {
 			nextCursor,
 			data,
-		});
+		};
 	});
