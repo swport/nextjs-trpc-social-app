@@ -5,12 +5,12 @@ import PostActions from "./PostActions";
 import styled from "styled-components";
 import { FaRegUserCircle } from "react-icons/fa";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { TPost } from "@/server/types";
+import { type TPost } from "@/server/types";
 import Link from "../UI/Link";
 import { trpc } from "@/utils/trpc";
-import { useSession } from "next-auth/react";
 import { useAtom } from "jotai";
 import { notifAtom } from "@/store/notification";
+import { formatDate, formatRelativeDate } from "@/utils/dates";
 
 type TPostComp = {
 	post: TPost;
@@ -80,7 +80,15 @@ const Post: React.FC<TPostComp> = ({ post, authUserId }) => {
 						<picture>
 							<FaRegUserCircle size="42px" />
 						</picture>
-						<span className="ms-2 fw-bold">{post?.User?.name}</span>
+						<p className="m-0 ms-2 lh-sm">
+							<b>{post?.User?.name}</b> <br />
+							<span
+								className="fs-xs text-muted"
+								title={formatDate(post.createdAt)}
+							>
+								{formatRelativeDate(post.createdAt)}
+							</span>
+						</p>
 					</div>
 					<Dropdown className="ms-auto">
 						<Dropdown.Toggle as={DropdownFc}>

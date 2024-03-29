@@ -36,6 +36,7 @@ export type TPost = {
 	file_type: Post["file_type"];
 	likes: number;
 	likedBySelf: boolean;
+	createdAt: Date;
 	LikedBy: {
 		userId: Post["userId"];
 	}[];
