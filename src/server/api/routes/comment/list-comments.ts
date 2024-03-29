@@ -49,6 +49,9 @@ export const listCommentProtectedProcedure = publicProcedure
 			where: {
 				postId,
 			},
+			orderBy: {
+				createdAt: "desc",
+			},
 		});
 
 		let nextCursor: typeof cursor | undefined = undefined;
