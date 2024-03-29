@@ -63,7 +63,6 @@ const Comments: React.FC<TProps> = ({ postId }) => {
 	return (
 		<div>
 			<div className="position-sticky-top-0 d-flex align-items-center mb-3">
-				<h5>Comments: </h5>
 				<button
 					type="button"
 					onClick={handleAddCommentBtnClick}

@@ -51,6 +51,8 @@ const DropdownFc = React.forwardRef<HTMLAnchorElement, AnchorProps>(
 	}
 );
 
+DropdownFc.displayName = "DropdownFc";
+
 const Post: React.FC<TPostComp> = ({ post, authUserId }) => {
 	const removePostMutation = trpc.post.remove.useMutation();
 	const [notifData, setNotifData] = useAtom(notifAtom);
