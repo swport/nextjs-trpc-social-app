@@ -62,11 +62,13 @@ const Post: React.FC<TPostComp> = ({ post, authUserId }) => {
 			removePostMutation.mutate(
 				{ postId },
 				{
+					// TODO: remove from the cache
 					onSuccess: () => {
 						setNotifData({
 							...notifData,
 							show: true,
-							content: "Post removed",
+							title: "Post removed",
+							content: "Post was removed successfully",
 						});
 					},
 				}

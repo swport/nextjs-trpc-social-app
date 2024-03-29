@@ -20,11 +20,13 @@ const Comment: React.FC<TCComment> = ({ authUserId, comment }) => {
 			deleteMutation.mutate(
 				{ commentId },
 				{
+					// TODO: remove from the cache
 					onSuccess: () => {
 						setNotifData({
 							...notifData,
 							show: true,
-							content: "Comment removed",
+							title: "Comment removed",
+							content: "Comment was removed successfully",
 						});
 					},
 				}
