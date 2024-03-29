@@ -19,5 +19,5 @@ const initialState: TStoreType = {
 export const notifAtom = atom(initialState);
 
 export const closeNotifAtom = atom(null, (_get, set) => {
-	return set(notifAtom, initialState);
+	return set(notifAtom, { ..._get(notifAtom), show: false });
 });
