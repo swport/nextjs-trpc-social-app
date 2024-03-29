@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "@/components/UI/Link";
 
 const leftbarBottomNavDividerStyle = {
 	"--bs-breadcrumb-divider": "'∙'",
@@ -7,13 +8,15 @@ const leftbarBottomNavDividerStyle = {
 const Footer = () => {
 	return (
 		<footer className="ms-3 mb-3 mt-5">
-			<small>&copy; 2023, mylo.com. All rights reserved.</small>
+			<p className="fs-sm text-muted">
+				&copy; 2023, mylo.com. All rights reserved.
+			</p>
 			<nav style={leftbarBottomNavDividerStyle} aria-label="breadcrumb">
-				<ol className="breadcrumb">
+				<ol className="breadcrumb mt-3" style={{ fontSize: "16px" }}>
 					<li className="breadcrumb-item">
-						<a href="#">
+						<Link href="/">
 							<small>Home</small>
-						</a>
+						</Link>
 					</li>
 					<li className="breadcrumb-item" aria-current="page">
 						<a href="#">
