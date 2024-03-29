@@ -49,4 +49,5 @@ export type TComment = {
 	id: Comment["id"];
 	content: Comment["content"] | null;
 	User: TPubUser | null;
+	createdAt: Date;
 };

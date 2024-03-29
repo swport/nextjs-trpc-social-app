@@ -31,6 +31,7 @@ export const addCommentProtectedProcedure = protectedProcedure
 					},
 					id: true,
 					content: true,
+					createdAt: true,
 				},
 				data: {
 					postId,

@@ -44,6 +44,7 @@ export const listCommentProtectedProcedure = publicProcedure
 				},
 				id: true,
 				content: true,
+				createdAt: true,
 			},
 			where: {
 				postId,
