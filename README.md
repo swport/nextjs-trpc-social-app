@@ -16,7 +16,7 @@ next-i18next (LtR only)
 
 ## Known issues, Pending tasks
 
-Issue: Common shared bundle size is about 1.1MB for prod build. Requires analysing packages and leverage code splitting.
+Issue: Common shared bundle size is about 1.1MB for prod build. Requires analysing packages and leverage code splitting. - https://stackoverflow.com/a/65456087
 
 UI fixes, Mobile responsiveness.
 
