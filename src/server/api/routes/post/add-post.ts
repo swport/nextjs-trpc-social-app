@@ -5,7 +5,7 @@ import type { TPost } from "@/server/types";
 import { z } from "zod";
 import { addPostFormSchema } from "@/utils/form-schemas";
 import { rescue } from "@/server/utils";
-import { setTypesafeKeyValToObject } from "@/utils/functions";
+import { setTypesafeKeyValToObject, titleToSlug } from "@/utils/functions";
 
 const prisma = new PrismaClient();
 
@@ -37,6 +37,7 @@ export const addPostProtectedProcedure = protectedProcedure
 					file_path: true,
 					file_type: true,
 					content: true,
+					slug: true,
 					createdAt: true,
 					LikedBy: {
 						select: {
@@ -54,6 +55,7 @@ export const addPostProtectedProcedure = protectedProcedure
 					file_path: image,
 					file_type: "image",
 					content: title.trim(),
+					slug: titleToSlug(title),
 					userId,
 					likesCount: 0,
 					createdAt: new Date(),
