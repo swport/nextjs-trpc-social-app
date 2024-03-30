@@ -32,6 +32,7 @@ export type TPubUser = {
 export type TPost = {
 	id: Post["id"];
 	content: Post["content"];
+	slug: Post["slug"];
 	file_path: Post["file_path"];
 	file_type: Post["file_type"];
 	likes: number;

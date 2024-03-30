@@ -44,6 +44,7 @@ export const fetchAllPostPublicProcedure = publicProcedure
 				file_path: true,
 				file_type: true,
 				content: true,
+				slug: true,
 				createdAt: true,
 				LikedBy: {
 					select: {

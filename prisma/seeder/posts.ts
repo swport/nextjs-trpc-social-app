@@ -18,6 +18,9 @@ const randomUserId = () => {
 
 const posts = [];
 
+const rWords = ["of", "the", "in", "on", "at", "to", "a", "is"];
+const rWordsRe = new RegExp("\\b(" + rWords.join("|") + ")\\b", "g");
+
 for (let i = 0; i < count; i++) {
 	let user;
 
@@ -29,10 +32,21 @@ for (let i = 0; i < count; i++) {
 		postsCount = howManyPosts();
 	}
 
+	const title = faker.lorem.words(10);
+
+	const slug = title
+		.toLowerCase()
+		.replace(/ /g, "-")
+		.replace(/[-]+/g, "-")
+		.replace(/[^\w-]+/g, "")
+		.replace(rWordsRe, "")
+		.substring(0, 72);
+
 	posts.push({
 		file_path: faker.image.urlPicsumPhotos(),
 		file_type: "image",
-		content: `title ${i}`,
+		content: faker.lorem.words(10),
+		slug,
 		userId: user,
 		likesCount: 0,
 		createdAt: new Date(),

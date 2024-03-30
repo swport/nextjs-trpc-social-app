@@ -91,7 +91,8 @@ model Post {
     id        Int     @id @default(autoincrement()) @db.UnsignedInt
     file_path String? @db.Text
     file_type String? @default("image") @db.VarChar(32)
-    content   String? @db.Text
+    content   String @db.Text
+    slug      String @db.VarChar(80)
 
     // one-to-one: belongs to one User
     User   User? @relation("user_posts", fields: [userId], references: [id], onDelete: SetNull)

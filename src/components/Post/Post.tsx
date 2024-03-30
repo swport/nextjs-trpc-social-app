@@ -101,7 +101,7 @@ const Post: React.FC<TPostComp> = ({ post, authUserId }) => {
 
 						<Dropdown.Menu>
 							<Dropdown.Item as="div" eventKey="1">
-								<Link href={`/post/${post.id}`}>View Post</Link>
+								<Link href={`/post/${post.id}/${post.slug}`}>View Post</Link>
 							</Dropdown.Item>
 							{authUserId && authUserId === post.User?.id ? (
 								<Dropdown.Item
