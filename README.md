@@ -2,6 +2,8 @@
 
 Simple Next.js, TRPC, Prisma based social site
 
+![alt text](https://i.imgur.com/OxZOncY.png)
+
 ## Stack
 
 Next.js, TRPC, Prisma, Bootstrap 5 - UI
