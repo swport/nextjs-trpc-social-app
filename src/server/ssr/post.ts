@@ -12,8 +12,7 @@ export const getServerSideProps = async (
 
 	const serverHelper = createServerSideHelpers({
 		router: appRouter,
-		// @ts-ignore
-		ctx: createInnerTRPCContext({ session: session }),
+		ctx: createInnerTRPCContext({ session: session, req: null }),
 		transformer: superjson,
 	});
 
