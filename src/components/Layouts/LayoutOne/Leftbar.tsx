@@ -14,10 +14,14 @@ const Leftbar = () => {
 
 	return (
 		<ul className="list-group list-group-flush gap-4 position-relative">
-			<li className="list-group-item my-2 my-md-4 border-0 site-logo">
-				<h3>
-					<Link href="/">myIlo.com</Link>
-				</h3>
+			<li className="list-group-item my-2 my-md-3 border-0 site-logo">
+				<p>
+					<Link href="/">
+						<span className="text-secondary fw-bold">NextTRPCSocial</span>
+						<br />
+						<span className="fs-sm text-muted">Simple twitter clone</span>
+					</Link>
+				</p>
 			</li>
 			<li className="list-group-item">
 				<Link href="/">

@@ -9,7 +9,9 @@ const Footer = () => {
 	return (
 		<footer className="ms-3 mb-3 mt-5">
 			<p className="fs-sm text-muted">
-				&copy; 2023, mylo.com. All rights reserved.
+				2024, NextTRPCSocial.
+				<br />
+				Open source project.
 			</p>
 			<nav style={leftbarBottomNavDividerStyle} aria-label="breadcrumb">
 				<ol className="breadcrumb mt-3" style={{ fontSize: "16px" }}>
