@@ -5,6 +5,8 @@
 	"scripts": {
 		"build": "next build",
 		"dev": "next dev",
+		"sst:dev": "sst bind next dev",
+		"sst:deploy": "sst deploy",
 		"postinstall": "prisma generate",
 		"start": "next start",
 		"test": "jest",
@@ -66,12 +68,12 @@
 		"prettier": "^2.8.8",
 		"prisma": "^4.14.0",
 		"sass": "^1.64.1",
-		"typescript": "^5.0.4"
+		"typescript": "^5.0.4",
+		"sst": "^2.41.4",
+		"aws-cdk-lib": "2.132.1",
+		"constructs": "10.3.0"
 	},
 	"ct3aMetadata": {
 		"initVersion": "7.13.1"
-	},
-	"prisma": {
-		"seed": "ts-node --compiler-options {\"module\":\"CommonJS\"}"
 	}
 }

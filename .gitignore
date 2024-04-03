@@ -42,3 +42,12 @@ yarn-error.log*
 *.tsbuildinfo
 
 mysql
+
+.aws/credentials
+.aws/permissions.json
+
+# sst
+.sst
+
+# open-next
+.open-next
