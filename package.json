@@ -6,9 +6,11 @@
 		"build": "next build",
 		"dev": "next dev",
 		"sst:dev": "sst bind next dev",
-		"sst:deploy": "sst deploy",
+		"sst:deploy": "sst deploy --stage production",
+		"sst:deploy:dev": "sst deploy --stage development",
+		"sst:deploy:stage": "sst deploy --stage staging",
 		"postinstall": "prisma generate",
-		"start": "next start",
+		"start": "npm run postinstall && next start",
 		"test": "jest",
 		"format": "prettier \"**/*\" --ignore-unknown",
 		"lint": "eslint . .*js --max-warnings 5"

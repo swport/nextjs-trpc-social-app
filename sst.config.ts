@@ -10,6 +10,10 @@ export default {
 		};
 	},
 	stacks(app) {
+		app.setDefaultFunctionProps({
+			runtime: "nodejs18.x",
+		});
+
 		app.stack(function Site({ stack }) {
 			const site = new NextjsSite(stack, "site");
 
