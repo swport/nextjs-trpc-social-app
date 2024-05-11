@@ -28,6 +28,7 @@ const config = {
 	compiler: {
 		// Enables the styled-components SWC transform
 		styledComponents: true
-	}
+	},
+	output: "standalone"
 };
 export default config;

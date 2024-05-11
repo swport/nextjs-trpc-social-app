@@ -1,0 +1,11 @@
+Dockerfile.dev
+Dockerfile.stage
+.dockerignore
+node_modules
+mysql
+npm-debug.log
+README.md
+.vscode
+.idea
+.next
+.git
